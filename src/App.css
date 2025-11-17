@@ -1,0 +1,19 @@
+
+
+.app {
+  display: flex;
+  height: auto;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  background: #f7f8fc;
+  overflow-y: auto;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f8fc;
+}
