@@ -4,6 +4,7 @@ import Header from "./components/header/Header";
 import SideBar from "./components/sidebar/SideBar";
 import EmployeeTable from "./components/content/EmployeeTable";
 import Calander from "./components/content/Calander";
+import Statistic from "./components/content/Statistic";
 
 function App() {
    
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/EmployeeTable" element={<EmployeeTable />} />
             <Route path="/Calander" element={<Calander />} />
+            <Route path="/Statistic" element={<Statistic />} />
           </Routes>
         </main>
       </div>
