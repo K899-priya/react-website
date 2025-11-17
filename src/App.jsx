@@ -5,6 +5,7 @@ import SideBar from "./components/sidebar/SideBar";
 import EmployeeTable from "./components/content/EmployeeTable";
 import Calander from "./components/content/Calander";
 import Statistic from "./components/content/Statistic";
+import Client from "./components/content/Client";
 
 function App() {
    
@@ -19,6 +20,7 @@ function App() {
             <Route path="/EmployeeTable" element={<EmployeeTable />} />
             <Route path="/Calander" element={<Calander />} />
             <Route path="/Statistic" element={<Statistic />} />
+            <Route path="/Client" element={<Client />} />
           </Routes>
         </main>
       </div>
