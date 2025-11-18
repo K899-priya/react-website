@@ -1,14 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Spotlight,
-  Building2,
-  Fish,
-  Flame,
-  Banknote,
-  Clock,
-  Timer,
-  Copyleft,
-} from "lucide-react";
+import { Spotlight, Building2, Fish, Flame, Banknote, Clock, Timer, Copyleft,} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 function slugify(name) {
@@ -18,18 +9,18 @@ function slugify(name) {
     .replace(/[\s_]+/g, "-")
     .replace(/[^\w-]/g, "");
 }
-+
+
 const ICON_OPTIONS = [
   { id: "spotlight", label: "Spotlight", component: Spotlight },
   { id: "building", label: "Building", component: Building2 },
   { id: "fish", label: "Fish", component: Fish },
-  { id: "flame", label: "Flame", component: Flame },
+  { id: "firestar", label: "FireStar", component: Flame },
   { id: "banknote", label: "Bank", component: Banknote },
 ];
 
 function getIconComponent(iconId) {
   const match = ICON_OPTIONS.find((opt) => opt.id === iconId);
-  return (match?.component ?? Spotlight);
+  return match?.component ?? Spotlight;
 }
 
 export default function SideBar() {
@@ -37,7 +28,7 @@ export default function SideBar() {
     { id: "arena-sport", name: "Arena Sport", icon: "spotlight" },
     { id: "dsv", name: "DSV", icon: "building" },
     { id: "seafood-mall", name: "Seafood Mall", icon: "fish" },
-    { id: "firestar", name: "FireStar", icon: "flame" },
+    { id: "flame", name: "Flame", icon: "flame" },
     { id: "zeta-bank", name: "Zeta Bank", icon: "banknote" },
   ];
 
@@ -72,7 +63,6 @@ export default function SideBar() {
     setAdding((v) => !v);
     setError("");
     setNewName("");
-   
   }
 
   function handleSubmit(e) {
@@ -95,7 +85,7 @@ export default function SideBar() {
     const newProject = {
       id,
       name,
-      icon: selectedIcon, // 
+      icon: selectedIcon,
     };
 
     setProjects((prev) => [...prev, newProject]);
@@ -210,11 +200,9 @@ export default function SideBar() {
               </button>
             </div>
 
-            {/* Icon selector */}
+            
             <div className="space-y-1">
-              <p className="text-xs font-semibold text-gray-300">
-                Select icon
-              </p>
+              <p className="text-xs font-semibold text-gray-300">Select icon</p>
               <div className="flex flex-wrap gap-2">
                 {ICON_OPTIONS.map((opt) => {
                   const IconComp = opt.component;
