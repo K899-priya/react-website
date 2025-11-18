@@ -18,14 +18,27 @@ function slugify(name) {
     .replace(/[\s_]+/g, "-")
     .replace(/[^\w-]/g, "");
 }
++
+const ICON_OPTIONS = [
+  { id: "spotlight", label: "Spotlight", component: Spotlight },
+  { id: "building", label: "Building", component: Building2 },
+  { id: "fish", label: "Fish", component: Fish },
+  { id: "flame", label: "Flame", component: Flame },
+  { id: "banknote", label: "Bank", component: Banknote },
+];
+
+function getIconComponent(iconId) {
+  const match = ICON_OPTIONS.find((opt) => opt.id === iconId);
+  return (match?.component ?? Spotlight);
+}
 
 export default function SideBar() {
   const builtinProjects = [
-    { id: "arena-sport", name: "Arena Sport", icon: <Spotlight size={16} /> },
-    { id: "dsv", name: "DSV", icon: <Building2 size={16} /> },
-    { id: "seafood-mall", name: "Seafood Mall", icon: <Fish size={16} /> },
-    { id: "firestar", name: "FireStar", icon: <Flame size={16} /> },
-    { id: "zeta-bank", name: "Zeta Bank", icon: <Banknote size={16} /> },
+    { id: "arena-sport", name: "Arena Sport", icon: "spotlight" },
+    { id: "dsv", name: "DSV", icon: "building" },
+    { id: "seafood-mall", name: "Seafood Mall", icon: "fish" },
+    { id: "firestar", name: "FireStar", icon: "flame" },
+    { id: "zeta-bank", name: "Zeta Bank", icon: "banknote" },
   ];
 
   const [projects, setProjects] = useState(() => {
@@ -39,13 +52,14 @@ export default function SideBar() {
 
   const [adding, setAdding] = useState(false);
   const [newName, setNewName] = useState("");
+  const [selectedIcon, setSelectedIcon] = useState("spotlight");
   const inputRef = useRef(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     try {
       localStorage.setItem("sidebar.projects", JSON.stringify(projects));
-    } catch{}
+    } catch {}
   }, [projects]);
 
   useEffect(() => {
@@ -58,6 +72,7 @@ export default function SideBar() {
     setAdding((v) => !v);
     setError("");
     setNewName("");
+   
   }
 
   function handleSubmit(e) {
@@ -76,7 +91,13 @@ export default function SideBar() {
       setError("A project with that name already exists.");
       return;
     }
-    const newProject = { id, name, icon: <Spotlight size={16} /> };
+
+    const newProject = {
+      id,
+      name,
+      icon: selectedIcon, // 
+    };
+
     setProjects((prev) => [...prev, newProject]);
     setNewName("");
     setAdding(false);
@@ -108,25 +129,28 @@ export default function SideBar() {
       </p>
 
       <ul className="space-y-2 flex-1 overflow-auto pr-1">
-        {projects.map((p) => (
-          <li
-            key={p.id}
-            className="flex items-center gap-2 text-sm text-gray-300"
-          >
-            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gray-400">
-              {p.icon ?? <Spotlight size={16} />}
-            </div>
-            <NavLink
-              to={`/${p.id}`}
-              className={({ isActive }) =>
-                "truncate " +
-                (isActive ? "text-white font-semibold" : "text-gray-200")
-              }
+        {projects.map((p) => {
+          const IconComp = getIconComponent(p.icon);
+          return (
+            <li
+              key={p.id}
+              className="flex items-center gap-2 text-sm text-gray-300"
             >
-              {p.name}
-            </NavLink>
-          </li>
-        ))}
+              <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gray-400">
+                <IconComp size={16} />
+              </div>
+              <NavLink
+                to={`/${p.id}`}
+                className={({ isActive }) =>
+                  "truncate " +
+                  (isActive ? "text-white font-semibold" : "text-gray-200")
+                }
+              >
+                {p.name}
+              </NavLink>
+            </li>
+          );
+        })}
       </ul>
 
       <p className="text-xs font-semibold text-gray-400 mt-5 mb-2 tracking-wide">
@@ -165,7 +189,7 @@ export default function SideBar() {
           <form
             id="add-project-area"
             onSubmit={handleSubmit}
-            className="space-y-2"
+            className="space-y-3"
           >
             <div className="flex gap-2">
               <input
@@ -186,6 +210,35 @@ export default function SideBar() {
               </button>
             </div>
 
+            {/* Icon selector */}
+            <div className="space-y-1">
+              <p className="text-xs font-semibold text-gray-300">
+                Select icon
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {ICON_OPTIONS.map((opt) => {
+                  const IconComp = opt.component;
+                  const selected = selectedIcon === opt.id;
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setSelectedIcon(opt.id)}
+                      className={
+                        "flex items-center gap-1 px-2 py-1 rounded-lg border text-xs transition " +
+                        (selected
+                          ? "bg-purple-600 border-purple-400 text-white"
+                          : "bg-gray-600 border-gray-500 text-gray-100 hover:bg-gray-500")
+                      }
+                    >
+                      <IconComp size={14} />
+                      <span>{opt.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className="flex gap-2">
               <button
                 type="button"
@@ -204,7 +257,6 @@ export default function SideBar() {
           </form>
         )}
       </div>
-
     </aside>
   );
 }
