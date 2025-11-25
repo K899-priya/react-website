@@ -18,7 +18,7 @@ function slugify(name) {
     .replace(/[\s_]+/g, "-")
     .replace(/[^\w-]/g, "");
 }
-3
+
 const ICON_OPTIONS = [
   { id: "spotlight", label: "Spotlight", component: Spotlight },
   { id: "building", label: "Building", component: Building2 },
@@ -56,11 +56,7 @@ export default function SideBar() {
   const inputRef = useRef(null);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    try {
-      localStorage.setItem("sidebar.projects", JSON.stringify(projects));
-    } catch {}
-  }, [projects]);
+  
 
   useEffect(() => {
     if (adding && inputRef.current) {
@@ -78,7 +74,7 @@ export default function SideBar() {
     e?.preventDefault?.();
     const name = newName.trim();
     if (!name) {
-      setError("Please enter a project name.");
+      setError("Enter a project name.");
       return;
     }
     const id = slugify(name);
