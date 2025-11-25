@@ -1,5 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Spotlight, Building2, Fish, Flame, Banknote, Clock, Timer, Copyleft,} from "lucide-react";
+import {
+  Spotlight,
+  Building2,
+  Fish,
+  Flame,
+  Banknote,
+  Clock,
+  Timer,
+  Copyleft,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 function slugify(name) {
@@ -9,7 +18,7 @@ function slugify(name) {
     .replace(/[\s_]+/g, "-")
     .replace(/[^\w-]/g, "");
 }
-
+3
 const ICON_OPTIONS = [
   { id: "spotlight", label: "Spotlight", component: Spotlight },
   { id: "building", label: "Building", component: Building2 },
@@ -200,7 +209,6 @@ export default function SideBar() {
               </button>
             </div>
 
-            
             <div className="space-y-1">
               <p className="text-xs font-semibold text-gray-300">Select icon</p>
               <div className="flex flex-wrap gap-2">
