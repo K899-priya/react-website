@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 28 15:20:44 2024
-
-@author: kumari priya
-"""
-
 import turtle
 
 def draw_attractive_design1():

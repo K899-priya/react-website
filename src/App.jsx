@@ -5,7 +5,7 @@ import Header from "./components/header/Header";
 import SideBar from "./components/sidebar/SideBar";
 import EmployeeTable from "./components/content/EmployeeTable";
 import Calander from "./components/content/Calander";
-import Statistic from "./components/content/Statistic";
+import Statistic from "../public/Statistic.py";
 
 function App() {
    
