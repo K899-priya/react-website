@@ -41,7 +41,7 @@ export default function Calendar() {
   return (
     <div>
       <h2 className=" fixed text-lg font-semibold mb-2">Calander</h2>
-      <div className="min-h-screen flex items-start justify-center bg-gray-50 p-6">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
         <div className="w-full max-w-md">
           <div className="flex items-center justify-between bg-white shadow-md p-4 rounded-2xl mb-4">
             <button
