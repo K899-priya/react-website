@@ -5,7 +5,7 @@ function drawAttractiveDesign1(ctx, width, height) {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, width, height);
 
-  const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+  const colors = ["red", "orange", "white", "green", "blue", "purple"];
 
   class Turtle {
     constructor(ctx, x, y) {
@@ -48,11 +48,11 @@ function drawAttractiveDesign1(ctx, width, height) {
   for (let i = 0; i < 180; i++) {
     pen.setColor(colors[i % 6]);
     pen.forward(200);
-    pen.right(61);
+    pen.right(65);
     pen.forward(100);
     pen.right(120);
     pen.forward(100);
-    pen.right(61);
+    pen.right(65);
     pen.forward(200);
     pen.right(181);
   }
